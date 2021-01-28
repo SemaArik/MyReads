@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import BooksList from './BooksList'
 
 
 class ListShelfsBooks extends Component {
@@ -61,10 +62,9 @@ class ListShelfsBooks extends Component {
           {shelfs.map((shelf) => (
             <div>
               <h2 className="bookshelf-title">{shelf.title}</h2>
-                    <div className="bookshelf-books">
-                    </div>
-
-         
+                  <BooksList
+                    bookListArray = {shelfs}
+                  />
             </div>
           ))}
   
