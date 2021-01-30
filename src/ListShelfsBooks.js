@@ -66,7 +66,7 @@ class ListShelfsBooks extends Component {
                     bookListArray = {shelfs}
                   />
             </div>
-          ))}
+          ))} 
   
 
 

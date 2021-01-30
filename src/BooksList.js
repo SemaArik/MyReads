@@ -38,7 +38,7 @@ class BooksList extends Component {
                       <li>
                       <div className="book">
                         <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: {book1.imageLinks} }}></div>
+                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: '' }}></div>
                           <div className="book-shelf-changer">
                             <select>
                               <option value="move" disabled>Move to...</option>
@@ -49,8 +49,8 @@ class BooksList extends Component {
                             </select>
                           </div>
                         </div>
-                        <div className="book-title">1776</div>
-                        <div className="book-authors">{book1.title}  </div>
+                        <div className="book-title">{book1.title}</div>
+                        <div className="book-authors">{book1.authors}  </div>
                       </div>
                       </li>
                     
