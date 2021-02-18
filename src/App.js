@@ -13,7 +13,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: []
+    bookShelfs: []
   }
 
   
@@ -39,28 +39,30 @@ class BooksApp extends React.Component {
     BooksAPI.getAll()
       .then((bookList) => {
         temp = groupBy(bookList,key);
-        alert('booklist ' + temp.length);
+        alert('booklist ' + Object.entries(temp).length);
+        this.setState(() => ({
+          bookShelfs: Object.entries(temp)
+        }))
       })
 
-      this.setState(() => ({
-        books: temp
-      }))
+      
 
       
       
   }
   render() {
+    alert(this.state.bookShelfs.keys);
     return (
 
    
 
-
+      
 
       <div className="app">
 
         <div>
               <ListShelfsBooks
-                shelfs = {this.state.books}
+                shelfs = {this.state.bookShelfs}
               />
           </div>
         

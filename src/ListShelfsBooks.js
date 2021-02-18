@@ -58,18 +58,18 @@ class ListShelfsBooks extends Component {
                 <div className="bookshelf">
 
             
+     
 
-          {shelfs.map((shelf) => (
+          {shelfs.forEach(([key, value]) => (
+           
             <div>
-              <h2 className="bookshelf-title">{shelf.title}</h2>
+              <h2 className="bookshelf-title">{key}</h2>
                   <BooksList
-                    bookListArray = {shelfs}
+                    bookListArray = {value}
                   />
             </div>
           ))} 
   
-
-
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>

@@ -22,7 +22,7 @@ class BooksList extends Component {
     const { query } = this.state
     const { bookListArray, onDeleteContact } = this.props
 
-
+    alert("array ");
 
     return (    
       
