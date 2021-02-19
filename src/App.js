@@ -39,7 +39,6 @@ class BooksApp extends React.Component {
     BooksAPI.getAll()
       .then((bookList) => {
         temp = groupBy(bookList,key);
-        alert('booklist ' + Object.entries(temp).length);
         this.setState(() => ({
           bookShelfs: Object.entries(temp)
         }))
@@ -51,7 +50,7 @@ class BooksApp extends React.Component {
       
   }
   render() {
-    alert(this.state.bookShelfs.keys);
+    
     return (
 
    

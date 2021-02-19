@@ -22,7 +22,7 @@ class BooksList extends Component {
     const { query } = this.state
     const { bookListArray, onDeleteContact } = this.props
 
-    alert("array ");
+   
 
     return (    
       
@@ -32,13 +32,13 @@ class BooksList extends Component {
                   <div className="bookshelf-books">
                 
                     <ol className="books-grid">
-                     
-                  
+
+                          
                     {bookListArray.map((book1) => (
                       <li>
                       <div className="book">
                         <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: '' }}></div>
+                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book1.imageLinks.thumbnail})` }}></div>
                           <div className="book-shelf-changer">
                             <select>
                               <option value="move" disabled>Move to...</option>
@@ -56,6 +56,8 @@ class BooksList extends Component {
                     
               
                     ))}   
+
+              
                      
                     </ol>
                   </div>
