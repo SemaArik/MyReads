@@ -1,8 +1,10 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Router } from 'react-router-dom'
 import './App.css'
 import ListShelfsBooks from './ListShelfsBooks'
+import Search from './SearchBook'
+
 
 
 class BooksApp extends React.Component {
@@ -14,10 +16,17 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    bookShelfs: []
+    bookShelfs: [],
+    allBooks:[]
   }
 
-  
+  updateShelfs = (chbook,chshelf) => {   
+    BooksAPI.update(chbook,chshelf).then(() => {
+      this.setState((prevState)=>({
+        books: prevState.books.filter(book=> book.id !== chbook.id).concat(chbook)
+      }))
+    });
+  }
 
   componentDidMount() {
     const groupBy = (array, key) => {
@@ -41,32 +50,28 @@ class BooksApp extends React.Component {
       .then((bookList) => {
         temp = groupBy(bookList,key);
         this.setState(() => ({
-          bookShelfs: Object.entries(temp)
+          bookShelfs: Object.entries(temp),
+          allBooks : bookList
         }))
       })
-
-      
-
-      
-      
   }
   render() {
-    
     return (
-
       <div className="app">
-
-        <div>
-              <ListShelfsBooks
-                shelfs = {this.state.bookShelfs}
-              />
+              <Route path="/search" render={() => (<Search myBooks={this.state.allBooks} updateShelfs={this.updateShelfs}></Search>)} />
+           
+            <Route path="/" exact render={()=>(<div className="list-books">
+            <div className="list-books-title"><h1>MyReads</h1></div>
+            <ListShelfsBooks
+                  shelfs = {this.state.bookShelfs}
+                />         
+            <div className="open-search">
+              <Link to='/search'><button>Add a book</button></Link>
+            </div>
           </div>
-        
-    
+        )} />
       </div>
     )
-
-    
 
   }
 }
