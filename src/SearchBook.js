@@ -6,74 +6,74 @@ import { Route, Link, Router } from 'react-router-dom'
 
 
 class SearchBook extends Component {
-  state = { 
-    books : []
+  state = {
+    books: []
   }
 
   onQuery = (searchChars) => {
-    if(searchChars !== "") {
-      BooksAPI.search(searchChars).then((books)=>{
-        if(!books.error){
+    if (searchChars !== "") {
+      BooksAPI.search(searchChars).then((books) => {
+        if (!books.error) {
           this.setShelf(books);
           this.setState(() => ({
-            books:books
+            books: books
           }))
         } else {
           this.setState(() => ({
-            books:[]
+            books: []
           }));
         }
       })
     } else {
       this.setState(() => ({
-        books:[]
+        books: []
       }))
-    }    
+    }
   }
 
   setShelf = (books) => {
     const myBooks = this.props.myBooks;
     books.map(book => {
       Object.keys(myBooks).forEach((el) => {
-        if(myBooks[el].id===book.id) {
+        if (myBooks[el].id === book.id) {
           book.shelf = myBooks[el].shelf;
-        }          
+        }
       })
-      return book;        
+      return book;
     })
   }
 
-  updateShelfs = (book, movedShelf)=>{
+  updateShelfs = (book, movedShelf) => {
     this.props.updateShelfs(book, movedShelf);
   }
 
-  render() { 
-      const { books } = this.state;
-      const booksLength = books.length > 0;
-      return (
-        <div className="search-books">
-          <div className="search-books-bar">
-            <Link to="/"><button className="close-search">Close</button></Link>
-            <div className="search-books-input-wrapper">
-              <input type="text" placeholder="Search by title or author" onChange={(event)=> this.onQuery(event.target.value)} />
-            </div>
-          </div>
-          <div className="search-books-results">
-            {booksLength ? (             
-                <ol className="books-grid">
-                      <BooksList
-                      bookListArray = {books}
-                    />
-                             
-                </ol>
-            ):( 
-                <></>
-              )
-            }
+  render() {
+    const { books } = this.state;
+    const booksLength = books.length > 0;
+    return (
+      <div className="search-books">
+        <div className="search-books-bar">
+          <Link to="/"><button className="close-search">Close</button></Link>
+          <div className="search-books-input-wrapper">
+            <input type="text" placeholder="Search by title or author" onChange={(event) => this.onQuery(event.target.value)} />
           </div>
         </div>
-       
-        );
+        <div className="search-books-results">
+          {booksLength ? (
+            <ol className="books-grid">
+              <BooksList
+                bookListArray={books}
+              />
+
+            </ol>
+          ) : (
+              <></>
+            )
+          }
+        </div>
+      </div>
+
+    );
   }
 }
 

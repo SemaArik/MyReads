@@ -6,10 +6,10 @@ import ShelfChanger from './ShelfChanger';
 class BooksList extends Component {
   static propTypes = {
     bookListArray: PropTypes.array.isRequired,
-   /* onDeleteContact: PropTypes.func.isRequired,*/
+    /* onDeleteContact: PropTypes.func.isRequired,*/
   }
 
-  
+
   state = {
     query: ''
   }
@@ -22,38 +22,35 @@ class BooksList extends Component {
     this.updateQuery('')
   }
   render() {
-    const { query } = this.state
-    const { bookListArray, onDeleteContact } = this.props
+
+    const { bookListArray } = this.props
+    return (
+      <div className="bookshelf-books">
+
+        <ol className="books-grid">
 
 
-    return (    
-                  <div className="bookshelf-books">
-                
-                    <ol className="books-grid">
+          {bookListArray.map((bookItem) => (
+            <li>
+              <div className="book">
+                <div className="book-top">
 
-                          
-                    {bookListArray.map((bookItem) => (
-                      <li>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookItem.imageLinks.thumbnail})` }}></div>
-                          <ShelfChanger currentShelf={bookItem.shelf}  />
-                        </div>
-                        <div className="book-title">{bookItem.title}</div>
-                        { bookItem.authors ? (bookItem.authors.map(author=>(
-                          <div key={author} className="book-authors">{author}</div>
-                      ))):''}
-                      </div>
-                      </li>
-                    
-              
-                    ))}   
+                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookItem.imageLinks.thumbnail})` }}></div>
+                  <ShelfChanger currentShelf={bookItem.shelf} />
+                </div>
+                <div className="book-title">{bookItem.title}</div>
+                {bookItem.authors ? (bookItem.authors.map(author => (
+                  <div key={author} className="book-authors">{author}</div>
+                ))) : ''}
+              </div>
+            </li>
+          ))}
 
-              
-                     
-                    </ol>
-                  </div>
-               
+
+
+        </ol>
+      </div>
+
     )
   }
 }
