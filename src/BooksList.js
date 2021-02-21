@@ -25,10 +25,6 @@ class BooksList extends Component {
    
 
     return (    
-      
-      
-       
-   
                   <div className="bookshelf-books">
                 
                     <ol className="books-grid">
