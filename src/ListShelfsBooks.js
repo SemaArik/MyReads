@@ -1,24 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BooksList from './BooksList'
+import * as BooksAPI from './BooksAPI'
 
 
 class ListShelfsBooks extends Component {
   static propTypes = {
     shelfs: PropTypes.array.isRequired,
-   
+    changeShelf: PropTypes.func.isRequired
   }
-  state = {
-    query: ''
-  }
-  updateQuery = (query) => {
-    this.setState(() => ({
-      query: query.trim()
-    }))
-  }
-  clearQuery = () => {
-    this.updateQuery('')
-  }
+  
+  
+
   render() {
     
     const { shelfs} = this.props
@@ -35,7 +28,7 @@ class ListShelfsBooks extends Component {
                 <div>
                   <h2 className="bookshelf-title">{shelfs[key][0]}</h2>
                   <BooksList
-                    bookListArray={shelfs[key][1]}
+                    bookListArray={shelfs[key][1]} changeShelf ={this.changeShelf} 
                   />
                 </div>
               ))}

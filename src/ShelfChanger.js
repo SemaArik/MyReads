@@ -5,12 +5,12 @@ import PropTypes from 'prop-types'
 const ShelfChanger = props => {
   const { currentShelf } = props;
 
-  const updateShelf = (movedShelf) => {
-    props.updateShelf(movedShelf);
+  const changeShelfEvent = (movedShelf) => {
+    props.changeShelf(movedShelf);
   }
-  return (
+  return ( 
     <div className="book-shelf-changer">
-      <select value={currentShelf ? currentShelf : 'none'} onChange={(event) => updateShelf(event.target.value)}>
+      <select value={currentShelf ? currentShelf : 'none'} onChange={(event) => changeShelfEvent(event.target.value)}>
         <option value="move" disabled>Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want To Read</option>
@@ -23,7 +23,7 @@ const ShelfChanger = props => {
 
 ShelfChanger.propTypes = {
   currentShelf: PropTypes.string,
-  isSearchPage: PropTypes.bool
+  changeShelf: PropTypes.func.isRequired
 }
 
 export default ShelfChanger

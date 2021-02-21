@@ -9,24 +9,19 @@ import Search from './SearchBook'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     bookShelfs: [],
-    allBooks:[]
+    allBooks: []
   }
 
-  updateShelfs = (chbook,chshelf) => {   
-    BooksAPI.update(chbook,chshelf).then(() => {
-      this.setState((prevState)=>({
-        books: prevState.books.filter(book=> book.id !== chbook.id).concat(chbook)
+  changeShelf = (chbook, chshelf) => {
+    BooksAPI.update(chbook, chshelf).then(() => {
+      this.setState((prevState) => ({
+        allBooks: prevState.books.filter(book => book.id !== chbook.id).concat(chbook)
       }))
     });
   }
+
+
 
   componentDidMount() {
     const groupBy = (array, key) => {
@@ -40,35 +35,35 @@ class BooksApp extends React.Component {
         return result;
       }, {}); // empty object is the initial value for result object
     };
-    
+
     const key = 'shelf';
     var temp = [];
-    
-    
+
+
 
     BooksAPI.getAll()
       .then((bookList) => {
-        temp = groupBy(bookList,key);
+        temp = groupBy(bookList, key);
         this.setState(() => ({
           bookShelfs: Object.entries(temp),
-          allBooks : bookList
+          allBooks: bookList
         }))
       })
   }
   render() {
     return (
       <div className="app">
-              <Route path="/search" render={() => (<Search myBooks={this.state.allBooks} updateShelfs={this.updateShelfs}></Search>)} />
-           
-            <Route path="/" exact render={()=>(<div className="list-books">
-            <div className="list-books-title"><h1>MyReads</h1></div>
-            <ListShelfsBooks
-                  shelfs = {this.state.bookShelfs}
-                />         
-            <div className="open-search">
-              <Link to='/search'><button>Add a book</button></Link>
-            </div>
+        <Route path="/search" render={() => (<Search myBooks={this.state.allBooks} updateShelfs={this.updateShelfs}></Search>)} />
+
+        <Route path="/" exact render={() => (<div className="list-books">
+          <div className="list-books-title"><h1>MyReads</h1></div>
+          <ListShelfsBooks
+            shelfs={this.state.bookShelfs} changeShelf={this.changeShelf}
+          />
+          <div className="open-search">
+            <Link to='/search'><button>Add a book</button></Link>
           </div>
+        </div>
         )} />
       </div>
     )
