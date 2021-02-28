@@ -7,7 +7,8 @@ import { Route, Link, Router } from 'react-router-dom'
 
 class SearchBook extends Component {
   state = {
-    books: []
+    books: [],
+    changeShelf: PropTypes.func.isRequired
   }
 
   onQuery = (searchChars) => {
@@ -62,7 +63,7 @@ class SearchBook extends Component {
           {booksLength ? (
             <ol className="books-grid">
               <BooksList
-                bookListArray={books}
+                bookListArray={books} changeShelf ={this.props.changeShelf} 
               />
 
             </ol>

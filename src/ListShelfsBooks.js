@@ -28,7 +28,7 @@ class ListShelfsBooks extends Component {
                 <div>
                   <h2 className="bookshelf-title">{shelfs[key][0]}</h2>
                   <BooksList
-                    bookListArray={shelfs[key][1]} changeShelf ={this.changeShelf} 
+                    bookListArray={shelfs[key][1]} changeShelf ={this.props.changeShelf} 
                   />
                 </div>
               ))}
