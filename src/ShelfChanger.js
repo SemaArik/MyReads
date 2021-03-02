@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 
@@ -6,7 +6,7 @@ const ShelfChanger = props => {
   const { currentShelf } = props;
 
   const changeShelfEvent = (movedShelf) => {
-    props.changeShelf(movedShelf);
+    props.changeBookShelf(movedShelf);
   }
   return ( 
     <div className="book-shelf-changer">
@@ -15,7 +15,7 @@ const ShelfChanger = props => {
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want To Read</option>
         <option value="read">Read</option>
-        <option value="none">None</option>
+        {props.showNone ? (<option value="none">None</option>):''}
       </select>
     </div>
   );
@@ -23,7 +23,8 @@ const ShelfChanger = props => {
 
 ShelfChanger.propTypes = {
   currentShelf: PropTypes.string,
-  changeShelf: PropTypes.func.isRequired
+  changeBookShelf: PropTypes.func.isRequired,
+  showNone:PropTypes.bool
 }
 
 export default ShelfChanger

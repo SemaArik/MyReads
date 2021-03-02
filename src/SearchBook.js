@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import BooksList from './BooksList'
-import { Route, Link, Router } from 'react-router-dom'
+import {Link } from 'react-router-dom'
 
 
 class SearchBook extends Component {
@@ -63,7 +63,7 @@ class SearchBook extends Component {
           {booksLength ? (
             <ol className="books-grid">
               <BooksList
-                bookListArray={books} changeShelf ={this.props.changeShelf} 
+                bookListArray={books} changeShelf ={this.props.changeShelf}  showNone={true}
               />
 
             </ol>
